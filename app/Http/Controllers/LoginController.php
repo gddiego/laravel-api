@@ -17,13 +17,14 @@ class LoginController extends Controller
 
             $input = $request->only('email', 'password');
 
+            $name = $request->only('email');
 
-
-            if (!$input) {
+            if (!$name) {
                 return response()->json([
-                    "message" => 'Usuário inválido',
+                    "message" => 'Email inválido',
                 ], 401);
             }
+
 
             $user = User::where('email', $params['email'])->get();
 
@@ -51,8 +52,6 @@ class LoginController extends Controller
                 ];
 
                 return response()->json(["data" => $response], 200);
-            } else {
-                return response()->json(["message" => "E-mail inválido"], 422);
             }
         } catch (\Throwable $th) {
             return response()->json($th->getMessage(), 500);

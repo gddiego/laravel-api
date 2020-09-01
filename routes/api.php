@@ -27,6 +27,8 @@ Route::group(['prefix' => 'v1'], function () {
     Route::post('/registrar', 'APIController@register');
     Route::post('/list', 'APIController@index');
     Route::post('/list/{id}', 'APIController@show');
+    Route::delete('/delete/{id}', 'APIController@destroy');
+
 
     Route::post('/login', 'LoginController@login');
 });

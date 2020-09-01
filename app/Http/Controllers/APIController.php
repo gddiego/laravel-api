@@ -92,5 +92,9 @@ class APIController extends Controller
         }
 
         $user->delete();
+
+        return response()->json([
+            'message'   => 'Registro deletado com sucesso'
+        ]);
     }
 }

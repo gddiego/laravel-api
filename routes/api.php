@@ -29,4 +29,4 @@ Route::group(['prefix' => 'v1'], function () {
     Route::post('/list/{id}', 'APIController@show');
 
     Route::post('/login', 'LoginController@login');
-})->middleware();
+});

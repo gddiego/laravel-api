@@ -48,8 +48,9 @@ class APIController extends Controller
 
 
         return response()->json([
-            'success'   =>  'usúsario criado com sucesso',
-            'data'      =>  $user
+
+            'data'      =>  $user,
+            'success'   =>  'usuario criado com sucesso'
         ], 200);
     }
 
@@ -77,7 +78,21 @@ class APIController extends Controller
             'token' => $token,
         ]);
     }
+    public function update(RegistrationFormRequest $request,  $id)
+    {
+        $user = User::find($id);
 
+        if (!$user) {
+            return response()->json([
+                'message'   => 'Sem Registros para serem atualizados',
+            ], 404);
+        }
+
+        $user->fill($request->all());
+        $user->save();
+
+        return response()->json($user);
+    }
 
 
 

@@ -41,8 +41,6 @@ class JwtMiddleware
             $credentials = JWT::decode($token, $key, ['HS256']);
         } catch (ExpiredException $e) {
 
-            // User::where('login', $login)->update(['logado' => false]);
-
             return response()->json([
                 'message' => 'O token utilizado expirou. Refaça seu login.'
             ], 401);
@@ -52,9 +50,6 @@ class JwtMiddleware
             ], 401);
         }
 
-        reconnect_data_base(get_connection_client($credentials->login), 'cliente');
-
-        // Now let's put the user in the request class so that you can grab it from there
         $request->auth = $credentials;
 
 
